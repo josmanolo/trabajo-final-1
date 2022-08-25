@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "timestamp": 3223423432,
+    "name": "Producto 1",
+    "description": "Descripcion del producto 1",
+    "code": "KS72K",
+    "imgUrl": "url-de-la-imagen.com",
+    "price": 2000,
+    "stock": 100
+  },
+  {
+    "id": 2,
+    "timestamp": 213123123,
+    "name": "Producto 2",
+    "description": "Descripcion del producto 2",
+    "code": "L2I2KS",
+    "imgUrl": "url-de-la-imagen2.com",
+    "price": 9283,
+    "stock": 240
+  }
+]

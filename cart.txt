@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "timestamp": 3223423432,
+    "products": [
+      {
+        "id": 2,
+        "timestamp": 213123123,
+        "name": "Producto 2",
+        "description": "Descripcion del producto 2",
+        "code": "L2I2KS",
+        "imgUrl": "url-de-la-imagen2.com",
+        "price": 9283,
+        "stock": 240
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "timestamp": 3223423432,
+    "products": [
+      {
+        "id": 2,
+        "timestamp": 213123123,
+        "name": "Producto 2",
+        "description": "Descripcion del producto 2",
+        "code": "L2I2KS",
+        "imgUrl": "url-de-la-imagen2.com",
+        "price": 9283,
+        "stock": 240
+      },
+      {
+        "title": "new",
+        "price": 234,
+        "thumbnail": "newUrl"
+      },
+      {
+        "title": "new",
+        "price": 234,
+        "thumbnail": "newUrl"
+      }
+    ]
+  }
+]
