@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-class Cart {
+class Products {
     constructor(route) {
         this.route = route;
     }
@@ -9,7 +9,7 @@ class Cart {
         try {
             const getProducts = await fs.promises.readFile(this.route, 'utf8');
             const productsParse = JSON.parse(getProducts);
-
+            console.log(productsParse)
             return productsParse;
         } catch (error) {
             return error;
@@ -27,28 +27,6 @@ class Cart {
                 : await fs.promises.writeFile(this.route, JSON.stringify([{...product, id: 1}], null, 2));
 
             return productsLength + 1;
-            
-        } catch (error) {
-            return error;
-        }
-    }
-
-    async saveProductOnCart(product, id) {
-        try {
-            const getCarts = await fs.promises.readFile(this.route, 'utf8');
-            const cartsParse = JSON.parse(getCarts);
-
-            const newCarts = cartsParse.map(cart => {
-                if (cart.id == id.id ) {
-                    cart.products.push(product);
-                }
-
-                return cart;
-            });
-
-            await fs.promises.writeFile(this.route, JSON.stringify(newCarts, null, 2));
-
-            return newCarts;
             
         } catch (error) {
             return error;
@@ -73,26 +51,34 @@ class Cart {
         }
         
     }
-
-
-    async deleteProductFromCart(idCart, idProduct) {
+    
+    async getById(id) {
         try {
-            const getCarts = await fs.promises.readFile(this.route, 'utf8');
-            const cartsParse = JSON.parse(getCarts);
-            const findCart = cartsParse.find(cart => cart.id == idCart);
+            const getProducts = await fs.promises.readFile(this.route, 'utf8');
+            const productsParse = JSON.parse(getProducts);
+            const findProduct = productsParse.find(prod => prod.id == id);
 
-            if(findCart) {
-                const newCarts = cartsParse.map(cart => {
-                    if(cart.id == idCart) {
-                        const products = cart.products.filter(product => product.id != idProduct);
-                        return {...cart, products};
-                    }
-                    return cart;
+            return findProduct ? findProduct : null;
+        } catch (error) {
+            return error;
+        }
+    }
+
+    async updateById(id, product) {
+        try {
+            const getProducts = await fs.promises.readFile(this.route, 'utf8');
+            const productsParse = JSON.parse(getProducts);
+            const findProduct = productsParse.find(prod => prod.id == id.id);
+
+            if(findProduct) {
+                const newProducts = productsParse.map(prod => {
+                    if (prod.id == id.id) return product;
+                    return prod;
                 });
 
-                await fs.promises.writeFile(this.route, JSON.stringify(newCarts, null, 2));
+                await fs.promises.writeFile(this.route, JSON.stringify(newProducts, null, 2));
             } else {
-                return "No se encontró el carrito"
+                return "No se encontró el producto"
             }
             
         } catch (error) {
@@ -100,20 +86,9 @@ class Cart {
         }
         
     }
-    
-    async getById(id) {
-        try {
-            const getProducts = await fs.promises.readFile(this.route, 'utf8');
-            const productsParse = JSON.parse(getProducts);
-            const findProduct = productsParse.find(prod => prod.id == id);
-            console.log(id)
-            return findProduct ? findProduct : null;
-        } catch (error) {
-            return error;
-        }
-    }
+
 
 }
 
-module.exports = Cart;
+module.exports = Products;
 
